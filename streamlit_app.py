@@ -19,14 +19,12 @@ for msg in st.session_state.messages:
 user_input = st.chat_input("Ask something about Python...")
 
 if user_input:
-    # Show user message
     st.session_state.messages.append(
         {"role": "user", "content": user_input}
     )
     with st.chat_message("user"):
         st.markdown(user_input)
 
-    # Send to FastAPI backend
     with st.spinner("Thinking..."):
         response = requests.post(
             API_URL,
@@ -39,7 +37,6 @@ if user_input:
     else:
         assistant_reply = "⚠️ Error: Backend not responding."
 
-    # Show assistant message
     st.session_state.messages.append(
         {"role": "assistant", "content": assistant_reply}
     )
